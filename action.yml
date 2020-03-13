@@ -30,4 +30,4 @@ branding:
   color: 'green'
 runs:
   using: 'docker'
-  image: 'docker://sunakka/action-jfrog-cli-wrapper:1'
+  image: 'docker://sunakka/action-jfrog-cli-wrapper:latest'
