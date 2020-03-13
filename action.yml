@@ -1,0 +1,33 @@
+name: 'jFrog CLI wrapper for GH actions'
+author: 'Sudhir Nakka'
+description: 'Run jFrog CLI commands from actions'
+inputs:
+  url:
+    description: 'URL of Artifactory instance'
+    required: true
+  credentials type:
+    description: 'Type of authentication to use. Must be one of username, apikey or accesstoken. Defaults to apikey'
+    required: true
+    default: apikey
+  user:
+    description: 'Username for Artifactory access. When credentials type is username'
+    required: false
+  password:
+    description: 'Password for Artifactory access. When credentials type is username'
+    required: false
+  apikey:
+    description: 'API Key based Artifactory access. When redentials type is apikey'
+    required: false
+  access token:
+    description: 'Artifactory access token based access. When credentials type is accesstoken'
+    required: false
+  working directory:
+    description: 'Working directory where the command needs to run'
+    required: false
+    default: .
+branding:
+  icon: 'package'
+  color: 'green'
+runs:
+  using: 'docker'
+  image: 'docker://sunakka/action-jfrog-cli-wrapper:1'
