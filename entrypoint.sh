@@ -23,14 +23,14 @@ then
   cd $INPUT_WORKING_DIRECTORY
 fi
 
-# Log command for info
-echo "[Info] jfrog rt $*"
-
-# Capture output
-output=$( sh -c "jfrog rt $*" )
-
-# Preserve output for consumption by downstream actions
-echo "$output" > "${HOME}/${GITHUB_ACTION}.log"
-
-# Write output to STDOUT
-echo "$output"
+## Log command for info
+#echo "[Info] jfrog rt $*"
+#
+## Capture output
+#output=$( sh -c "jfrog rt $*" )
+#
+## Preserve output for consumption by downstream actions
+#echo "$output" > "${HOME}/${GITHUB_ACTION}.log"
+#
+## Write output to STDOUT
+#echo "$output"
