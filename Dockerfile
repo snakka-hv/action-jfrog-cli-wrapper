@@ -1,9 +1,9 @@
 FROM alpine:3.10
 
-LABEL version="1.2.0"
-LABEL repository="https://github.com/advancedcsg-open/action-jfrog-cli"
-LABEL homepage="https://github.com/advancedcsg-open/action-jfrog-cli"
-LABEL maintainer="Advanced Toolchain"
+LABEL version="0.0.1"
+LABEL repository="https://github.com/snakka-hv/action-jfrog-cli-wrapper"
+LABEL homepage="https://github.com/snakka-hv/action-jfrog-cli-wrapper"
+LABEL maintainer="Sudhir Nakka"
 LABEL "com.github.actions.name"="jFrog CLI"
 LABEL "com.github.actions.description"="Run jFrog CLI commands from actions"
 LABEL "com.github.actions.icon"="check"
