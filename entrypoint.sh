@@ -31,7 +31,7 @@ while [ -n "$rest" ] ; do
   [ "$rest" = "${rest/;/}" ] && rest= || rest=${rest#*;}
   echo "+ \"$str\""
   echo "[Info] Uploading artifact: jfrog rt u $str $INPUT_ARTIFACTTO --build-name=$INPUT_BUILDNAME --build-number=$INPUT_BUILDNUMBER"
-  outputUpload=$( sh -c "jfrog rt u $INPUT_ARTIFACTFROM $INPUT_ARTIFACTTO --build-name=$INPUT_BUILDNAME --build-number=$INPUT_BUILDNUMBER" )
+  outputUpload=$( sh -c "jfrog rt u $str $INPUT_ARTIFACTTO --build-name=$INPUT_BUILDNAME --build-number=$INPUT_BUILDNUMBER" )
   echo "$outputUpload" > "${HOME}/${GITHUB_ACTION}.log"
   echo "$outputUpload"
 done
