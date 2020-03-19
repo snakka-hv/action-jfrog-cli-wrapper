@@ -24,9 +24,9 @@ then
 fi
 
 # Log command for info
-echo "[Info] Uploading artifact: jfrog rt $INPUT_ARTIFACTFROM $INPUT_ARTIFACTTO --build-name=$INPUT_BUILDNAME --build-number=$INPUT_BUILDNUMBER"
+echo "[Info] Uploading artifact: jfrog rt u $INPUT_ARTIFACTFROM $INPUT_ARTIFACTTO --build-name=$INPUT_BUILDNAME --build-number=$INPUT_BUILDNUMBER"
 # Capture output
-outputUpload=$( sh -c "jfrog rt $INPUT_ARTIFACTFROM $INPUT_ARTIFACTTO --build-name=$INPUT_BUILDNAME --build-number=$INPUT_BUILDNUMBER" )
+outputUpload=$( sh -c "jfrog rt u $INPUT_ARTIFACTFROM $INPUT_ARTIFACTTO --build-name=$INPUT_BUILDNAME --build-number=$INPUT_BUILDNUMBER" )
 # Write for further analysis if needed
 echo "$outputUpload" > "${HOME}/${GITHUB_ACTION}.log"
 # Write output to STDOUT
