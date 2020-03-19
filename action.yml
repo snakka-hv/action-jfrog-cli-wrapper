@@ -21,6 +21,22 @@ inputs:
   access token:
     description: 'Artifactory access token based access. When credentials type is accesstoken'
     required: false
+  artifactFrom:
+    description: 'Artifact to be picked up from'
+    required: true
+  artifactTo:
+    description: 'Artifact to be uploaded to'
+    required: true
+  buildName:
+    description: 'Name of the build'
+    required: true
+  buildNumber:
+    description: 'Build Number to be marked'
+    required: true
+  publish:
+    description: 'Whether to publish build or not. true/false'
+    required: false
+    default: 'false'
   working directory:
     description: 'Working directory where the command needs to run'
     required: false

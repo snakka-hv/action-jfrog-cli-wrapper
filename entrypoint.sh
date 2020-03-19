@@ -23,14 +23,26 @@ then
   cd $INPUT_WORKING_DIRECTORY
 fi
 
-## Log command for info
-#echo "[Info] jfrog rt $*"
-#
-## Capture output
-#output=$( sh -c "jfrog rt $*" )
-#
-## Preserve output for consumption by downstream actions
-#echo "$output" > "${HOME}/${GITHUB_ACTION}.log"
-#
-## Write output to STDOUT
-#echo "$output"
+# Log command for info
+echo "[Info] Uploading artifact: jfrog rt $INPUT_ARTIFACTFROM $INPUT_ARTIFACTTO --build-name=$INPUT_BUILDNAME --build-number=$INPUT_BUILDNUMBER"
+# Capture output
+outputUpload=$( sh -c "jfrog rt $INPUT_ARTIFACTFROM $INPUT_ARTIFACTTO --build-name=$INPUT_BUILDNAME --build-number=$INPUT_BUILDNUMBER" )
+# Write for further analysis if needed
+echo "$outputUpload" > "${HOME}/${GITHUB_ACTION}.log"
+# Write output to STDOUT
+echo "$outputUpload"
+
+# Conditional build publish
+if [ $INPUT_PUBLISH == "true" ];
+then
+  echo "[Info] Pushing build info: jfrog rt bce $INPUT_BUILDNAME $INPUT_BUILDNUMBER"
+  outputPushInfo=$( sh -c "jfrog rt bce $INPUT_BUILDNAME $INPUT_BUILDNUMBER")
+
+  echo "[Info] Pushing build artifacts: jfrog rt bp $INPUT_BUILDNAME $INPUT_BUILDNUMBER"
+  outputPublish=$( sh -c "jfrog rt bp $INPUT_BUILDNAME $INPUT_BUILDNUMBER")
+
+  echo "$outputPushInfo" > "${HOME}/${GITHUB_ACTION}.log"
+  echo "$outputPublish" > "${HOME}/${GITHUB_ACTION}.log"
+  echo "$outputPushInfo"
+  echo "$outputPublish"
+fi
