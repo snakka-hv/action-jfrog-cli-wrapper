@@ -23,14 +23,27 @@ then
   cd $INPUT_WORKING_DIRECTORY
 fi
 
-# Log command for info
-echo "[Info] Uploading artifact: jfrog rt u $INPUT_ARTIFACTFROM $INPUT_ARTIFACTTO --build-name=$INPUT_BUILDNAME --build-number=$INPUT_BUILDNUMBER"
-# Capture output
-outputUpload=$( sh -c "jfrog rt u $INPUT_ARTIFACTFROM $INPUT_ARTIFACTTO --build-name=$INPUT_BUILDNAME --build-number=$INPUT_BUILDNUMBER" )
-# Write for further analysis if needed
-echo "$outputUpload" > "${HOME}/${GITHUB_ACTION}.log"
-# Write output to STDOUT
-echo "$outputUpload"
+
+rest=$INPUT_ARTIFACTFROM
+while [ -n "$rest" ] ; do
+  str=${rest%%;*}  # Everything up to the first ';'
+  # Trim up to the first ';' -- and handle final case, too.
+  [ "$rest" = "${rest/;/}" ] && rest= || rest=${rest#*;}
+  echo "+ \"$str\""
+  echo "[Info] Uploading artifact: jfrog rt u $str $INPUT_ARTIFACTTO --build-name=$INPUT_BUILDNAME --build-number=$INPUT_BUILDNUMBER"
+  outputUpload=$( sh -c "jfrog rt u $INPUT_ARTIFACTFROM $INPUT_ARTIFACTTO --build-name=$INPUT_BUILDNAME --build-number=$INPUT_BUILDNUMBER" )
+  echo "$outputUpload" > "${HOME}/${GITHUB_ACTION}.log"
+  echo "$outputUpload"
+done
+
+## Log command for info
+#echo "[Info] Uploading artifact: jfrog rt u $INPUT_ARTIFACTFROM $INPUT_ARTIFACTTO --build-name=$INPUT_BUILDNAME --build-number=$INPUT_BUILDNUMBER"
+## Capture output
+#outputUpload=$( sh -c "jfrog rt u $INPUT_ARTIFACTFROM $INPUT_ARTIFACTTO --build-name=$INPUT_BUILDNAME --build-number=$INPUT_BUILDNUMBER" )
+## Write for further analysis if needed
+#echo "$outputUpload" > "${HOME}/${GITHUB_ACTION}.log"
+## Write output to STDOUT
+#echo "$outputUpload"
 
 # Conditional build publish
 if [ $INPUT_PUBLISH == "true" ];
