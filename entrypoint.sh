@@ -54,6 +54,9 @@ then
   echo "[Info] Pushing build artifacts: jfrog rt bp $INPUT_BUILDNAME $INPUT_BUILDNUMBER"
   outputPublish=$( sh -c "jfrog rt bp $INPUT_BUILDNAME $INPUT_BUILDNUMBER")
 
+  echo "[Info] Promoting build artifacts: jfrog rt bp $INPUT_BUILDNAME $INPUT_BUILDNUMBER"
+  outputPublish=$( sh -c "jfrog rt bpr $INPUT_BUILDNAME $INPUT_BUILDNUMBER lafayette_release")
+
   echo "$outputPushInfo" > "${HOME}/${GITHUB_ACTION}.log"
   echo "$outputPublish" > "${HOME}/${GITHUB_ACTION}.log"
   echo "$outputPushInfo"
