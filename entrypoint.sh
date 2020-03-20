@@ -29,11 +29,16 @@ while [ -n "$rest" ] ; do
   str=${rest%%;*}  # Everything up to the first ';'
   # Trim up to the first ';' -- and handle final case, too.
   [ "$rest" = "${rest/;/}" ] && rest= || rest=${rest#*;}
-  echo "+ \"$str\""
-  echo "[Info] Uploading artifact: jfrog rt u $str $INPUT_ARTIFACTTO --build-name=$INPUT_BUILDNAME --build-number=$INPUT_BUILDNUMBER"
-  outputUpload=$( sh -c "jfrog rt u $str $INPUT_ARTIFACTTO --build-name=$INPUT_BUILDNAME --build-number=$INPUT_BUILDNUMBER" )
-  echo "$outputUpload" > "${HOME}/${GITHUB_ACTION}.log"
-  echo "$outputUpload"
+  if [ -z "$str" ]
+  then
+    echo "Extra semicolons detected. Safe Skip"
+  else
+    echo "+ \"$str\""
+    echo "[Info] Uploading artifact: jfrog rt u $str $INPUT_ARTIFACTTO --build-name=$INPUT_BUILDNAME --build-number=$INPUT_BUILDNUMBER"
+    outputUpload=$( sh -c "jfrog rt u $str $INPUT_ARTIFACTTO --build-name=$INPUT_BUILDNAME --build-number=$INPUT_BUILDNUMBER" )
+    echo "$outputUpload" > "${HOME}/${GITHUB_ACTION}.log"
+    echo "$outputUpload"
+  fi
 done
 
 ## Log command for info
