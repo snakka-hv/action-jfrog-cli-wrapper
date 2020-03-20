@@ -46,4 +46,4 @@ branding:
   color: 'green'
 runs:
   using: 'docker'
-  image: 'docker://sudhirnakka/action-jfrog-cli-wrapper:latest'
+  image: 'docker://sudhirnakka/jfrog-cli-alpine-lite:latest'

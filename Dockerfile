@@ -1,8 +1,8 @@
 FROM alpine:3.10
 
 LABEL version="0.0.1"
-LABEL repository="https://github.com/snakka-hv/action-jfrog-cli-wrapper"
-LABEL homepage="https://github.com/snakka-hv/action-jfrog-cli-wrapper"
+LABEL repository="https://github.com/snakka-hv/jfrog-cli-publisher"
+LABEL homepage="https://github.com/snakka-hv/jfrog-cli-publisher"
 LABEL maintainer="Sudhir Nakka"
 LABEL "com.github.actions.name"="jFrog CLI"
 LABEL "com.github.actions.description"="Run jFrog CLI commands from actions"
