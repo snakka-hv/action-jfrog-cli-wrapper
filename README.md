@@ -1,4 +1,4 @@
-# action-jfrog-cli-wrapper
+# jfrog-cli-publisher
 Jfrog cli wrapper that can be used within GH actions to publish artifacts
 
 ## Usage
