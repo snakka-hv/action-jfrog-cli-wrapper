@@ -29,6 +29,7 @@ while [ -n "$rest" ] ; do
   str=${rest%%;*}  # Everything up to the first ';'
   # Trim up to the first ';' -- and handle final case, too.
   [ "$rest" = "${rest/;/}" ] && rest= || rest=${rest#*;}
+  str="$(echo -e "${str}" | sed -e 's/^[[:space:]]*//')"
   if [ -z "$str" ]
   then
     echo "Extra semicolons detected. Safe Skip"
